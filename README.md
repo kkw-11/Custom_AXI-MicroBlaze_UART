@@ -22,6 +22,17 @@
 
 ## 2. 시스템 블록도
 
+![Vivado Block Design](docs/images/block_design.png)
+
+- Vivado Block Design 원본 화면 (`design_1.bd`)
+- 왼쪽: 클럭(clk_wiz_1), 리셋(rst_clk_wiz_1_100M), MicroBlaze, 인터럽트 컨트롤러(axi_intc + xlconcat)
+- 가운데: AXI Interconnect (M00~M07 → 주변장치)
+- 오른쪽: axi_gpio_0~3, axi_uartlite_0, **uart_0 (커스텀 IP, uart_v1.0)** → 외부 포트
+- uart_0: `tx` → `uart_tx`(JB1), `uart_rx`(JB2) → `rx`, `intr` → xlconcat In0
+
+<details>
+<summary>간략도 (연결 관계만)</summary>
+
 ```mermaid
 flowchart LR
     subgraph CPU측
@@ -44,6 +55,8 @@ flowchart LR
     BUS --> GPIO
     BUS --> INTC
 ```
+
+</details>
 
 - CPU는 모든 주변장치를 **메모리 주소**로 읽고 쓴다 (memory-mapped I/O)
 - `uart_0`만 직접 만든 IP이고, 나머지는 Xilinx 기본 IP
