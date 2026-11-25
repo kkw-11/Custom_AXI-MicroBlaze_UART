@@ -1,0 +1,22 @@
+# Vivado generated
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+.Xil/
+*.jou
+*.log
+*.str
+*.backup.*
+
+# Vitis: keep only app sources (platform is rebuilt from xsa)
+vitis_workspace/*
+!vitis_workspace/hello_uart/
+vitis_workspace/hello_uart/*
+!vitis_workspace/hello_uart/src/
+
+# xsa: keep only the exported hardware file
+xsa/*
+!xsa/design_1_wrapper.xsa
